@@ -244,5 +244,5 @@ gcc -shared -o output.so main.c  # 生成共享库
 
 # CMake
 
-编译配置工具，主要用于生成makefile。详细见[cmake笔记](cmake笔记)与[别人的cmake笔记](别人的cmake笔记)
+编译配置工具，主要用于生成makefile。详细见[cmake笔记](./cmake笔记)与[别人的cmake笔记](./别人的cmake笔记)
 
