@@ -1,4 +1,6 @@
-# man
+# 基本命令
+
+## man
 
 manual 的缩写，可以用来找到帮助文档，”有问题，找男人“
 
@@ -6,7 +8,7 @@ manual 的缩写，可以用来找到帮助文档，”有问题，找男人“
 man ls  # 得到ls的帮助文档
 ```
 
-# ls
+## ls
 
 list 的缩写，列出文件结构
 
@@ -18,7 +20,7 @@ ll  # ls -l 的别名，和ls -l 等效，写起来更短
 ls /etc  # 列出指定目录下的内容 这个例子中”/etc“ 是指定目录
 ```
 
-# cd
+## cd
 
 change directory 的缩写，进入指定目录
 
@@ -27,7 +29,7 @@ cd src  # 进入当前目录下的src目录（相对路径）
 cd /etc  # 进入指定目录 这个例子中”/etc“ 是指定目录（绝对路径）
 ```
 
-# rm
+## rm
 
 remove 的缩写，删除文件或目录
 
@@ -37,7 +39,7 @@ rm -r directory  # 删除文件夹
 rmdir directory  # 删除文件夹
 ```
 
-# mv
+## mv
 
 move 的缩写，移动文件或目录
 
@@ -48,7 +50,7 @@ mv 111.txt 222.txt  # 把源文件 移动到指定位置，同时源文件的名
 mv directory dest_directory/111.txt  # 把指定文件夹移动到 目标文件夹下，同时名称发生改变，注意此时文件夹名字是111.txt，他还是文件夹而不是文件
 ```
 
-# touch
+## touch
 
 创建文件（一个空文件），或者更改文件时间戳（文件修改时间）
 
@@ -56,7 +58,7 @@ mv directory dest_directory/111.txt  # 把指定文件夹移动到 目标文件�
 touch 111.txt  # 如果当前目录下没有111.txt文件，则创建一个
 ```
 
-# cat
+## cat
 
 concatenate的缩写，查看文件内容
 
@@ -78,7 +80,7 @@ cat > 111.txt  # 会创建一个文件111.txt，然后在终端上提示输入�
 cat > 111.txt  # 会创建一个文件111.txt，然后在终端上提示输入文件内容，之后将该内容追加进文件
 ```
 
-# more
+## more
 
 也用于查看文件，但适合查看内容较多的文件，查看时可以滚动屏幕和翻页
 
@@ -86,7 +88,7 @@ cat > 111.txt  # 会创建一个文件111.txt，然后在终端上提示输入�
 more 111.txt
 ```
 
-# echo
+## echo
 
 打印字符串
 
@@ -103,7 +105,7 @@ name=haha  # 定义一个变量name
 echo $name  # 打印变量name的值
 ```
 
-# grep
+## grep
 
 global regular expression print的缩写，文本搜索工具
 
@@ -132,7 +134,7 @@ grep -E '^1[0-9]$' 111.txt  # 在文件111.txt中搜索以‘1’为行开头，
 - 匹配模式默认意思就是要匹配的字符串
 - 在正则匹配中，匹配模式就是正则表达式
 
-# find
+## find
 
 在指定目录查找文件
 
@@ -158,7 +160,9 @@ find . -name '*.txt'  # 在当前目录递归查找 以‘.txt’为后缀名的
 
 - -maxdepth要作为第一个变量
 
-# xargs
+# 高级命令
+
+## xargs
 
 eXtended arguments的缩写，以为扩展的参数处理命令，可用于分割多条参数，通常与管道一起使用
 
@@ -188,15 +192,25 @@ xargs -d ',' echo < 111.txt  # xargs将','作为分隔符（定界符），而�
 find ./ -name '*,txt' | xargs grep -n 'main'
 ```
 
-# sed
+## sed
 
 stream editor的缩写，流编辑器，一个文本处理命令，可以用于对文本进行替换、删除、插入、打印等操作
 
+## read
 
+## pwd
 
-# read
+print word directory的缩写，打印当前目录
 
-# ssh 
+## which
+
+打印命令所在的路径
+
+```bash
+which ls  # 打印命令ls所在的路径：/usr/bin/ls
+```
+
+## ssh 
 
 secure shell的缩写，安全远程通信
 
@@ -205,31 +219,33 @@ ssh user_name@host_ip
 ssh user_name@host_name
 ```
 
-# pwd
+## whoami
 
-print word directory的缩写，打印当前目录
+”我是谁“，打印当前的用户名
 
-# ps
+## ps
 
 打印当前进程
 
-# fd
+## df
 
-free disk的缩写，查看磁盘使用情况
+disk free的缩写，查看磁盘使用情况
 
-# systemctl
+## systemctl
 
 system control的缩写，管理系统服务
 
-# vim
+# 开发命令
+
+## vim
 
 visual interface improved的缩写，一个文本编辑工具。详细间[vim笔记](vim笔记)
 
-# Git
+## Git
 
 版本控制工具。详细见[git笔记](git笔记)
 
-# GCC
+## GCC
 
 GCC 是 “GNU Complier Collection”的缩写（原来是"GNU C Complier"），一个GNU的开发工具包
 
@@ -242,7 +258,7 @@ gcc -shared -o output.so main.c  # 生成共享库
 
 **G++**用于编译**c++**程序
 
-# CMake
+## CMake
 
 编译配置工具，主要用于生成makefile。详细见[cmake笔记](./cmake笔记)与[别人的cmake笔记](./别人的cmake笔记)
 
