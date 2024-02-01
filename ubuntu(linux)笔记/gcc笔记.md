@@ -923,7 +923,7 @@ time ./main_o2unroll
 
 
 
-# c++编译
+# 八、c++编译
 
 ## 1. 概述
 
@@ -980,11 +980,15 @@ nm T
 
 ldd
 
+
+
 gprof 记录函数 调用次数 执行时长 用于优化 profiler
 
 -pg 内嵌代码 gmon.out
 
 gcov coverage 覆盖度测试
+
+# 十、gcc选项汇总
 
 
 

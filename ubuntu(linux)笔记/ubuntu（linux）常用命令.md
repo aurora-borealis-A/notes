@@ -12,17 +12,52 @@ man ls  # 得到ls的帮助文档
 
 list 的缩写，列出文件结构
 
+格式：`ls [选项] [文件或目录]`
+
+选项：
+
+- `-l`：查看详细信息
+- `-a`：包含隐藏文件
+- `-h`：以人性化的方式显示信息，一般都和`-l`联用
+
 ```bash
 ls  # 列出当前目录中有哪些文件和子目录
 ls -a  # 包含隐藏文件（以“.” 开头的文件和目录）
-ls -l  # 所有文件的详细信息（包括权限信息等）
-ll  # ls -l 的别名，和ls -l 等效，写起来更短
+ls -l  # 所有文件（不包括隐藏文件）的详细信息（包括权限信息等）
+ll -lh  # 列出的详细信息中，文件大小信息有了单位。
+ll  # ls -la 的别名，和ls -la 等效，写起来更短
 ls /etc  # 列出指定目录下的内容 这个例子中”/etc“ 是指定目录
+ls *.txt  # 列出所有文本文件
+```
+
+## touch
+
+创建文件（一个空文件），或者更改文件时间戳（文件修改时间）
+
+```bash
+touch 111.txt  # 如果当前目录下没有111.txt文件，则创建一个
+```
+
+## mkdir
+
+make directory的缩写，创建一个目录
+
+格式：`mkdir 目录名`
+
+参数：
+
+- `-p`：递归地创建目录
+
+例如：
+
+```bash
+mkdir haha  # 创建一个名为"haha"的目录
+mkdir -p haha/lala  # 创建目录 haha/lala
 ```
 
 ## cd
 
-change directory 的缩写，进入指定目录
+change directory 的缩写，进入指定目录（更换当前工作目录）
 
 ```bash
 cd src  # 进入当前目录下的src目录（相对路径）
@@ -43,6 +78,14 @@ rmdir directory  # 删除文件夹
 
 move 的缩写，移动文件或目录
 
+格式：`mv 源文件/目录 目标文件/目录`
+
+选项：
+
+- `-r`：递归地移动目录
+
+例如：
+
 ```bash
 mv 111.txt dest_directory  # 把源文件 移动到目标文件夹下
 mv 111.txt dest_directory/111.txt  # 把源文件 移动到指定位置
@@ -50,12 +93,21 @@ mv 111.txt 222.txt  # 把源文件 移动到指定位置，同时源文件的名
 mv directory dest_directory/111.txt  # 把指定文件夹移动到 目标文件夹下，同时名称发生改变，注意此时文件夹名字是111.txt，他还是文件夹而不是文件
 ```
 
-## touch
+## cp
 
-创建文件（一个空文件），或者更改文件时间戳（文件修改时间）
+copy 的缩写，复制文件或目录，用法与mv基本相同
+
+格式：`cp 源文件/目录 目标文件/目录`
+
+选项：
+
+- `-r`：递归地复制目录
+- `-i`：覆盖文件前提示
 
 ```bash
-touch 111.txt  # 如果当前目录下没有111.txt文件，则创建一个
+cp 111.txt dest_directory  # 把源文件 复制到目标文件夹下
+cp 111.txt dest_directory/111.txt  # 把源文件 复制到指定位置
+cp 111.txt 222.txt  # 把源文件 复制到指定位置，同时源文件的名称也被更改为目标文件的名称
 ```
 
 ## cat
@@ -84,8 +136,18 @@ cat > 111.txt  # 会创建一个文件111.txt，然后在终端上提示输入�
 
 也用于查看文件，但适合查看内容较多的文件，查看时可以滚动屏幕和翻页
 
+命令：
+
+- `f`：向下翻页
+- `space`：向下翻页
+- `b`：向上翻页
+- `enter`：向下滚动一行
+- `!`：调用shell命令
+- `v`：使用vim编辑
+
 ```bash
 more 111.txt
+ls -l | more
 ```
 
 ## echo
@@ -105,13 +167,31 @@ name=haha  # 定义一个变量name
 echo $name  # 打印变量name的值
 ```
 
+## tree
+
+以树状图形式显示目录结构
+
+格式：`tree [选项] [指定目录]`
+
+选项：
+
+- `-d`：树状图中只包含目录，不包括文件
+
+例如：
+
+```bash
+tree  # 以树状图形式显示当前目录结构
+tree ~  # 显示家目录的结构
+tree -d ~ # 不包括文件
+```
+
 ## grep
 
 global regular expression print的缩写，文本搜索工具
 
 格式：`grep 匹配模式 文件名`
 
-参数：
+选项：
 
 - -i 忽略大小写
 - -E：正则匹配
@@ -140,7 +220,7 @@ grep -E '^1[0-9]$' 111.txt  # 在文件111.txt中搜索以‘1’为行开头，
 
 格式：`find 目录 变量名 变量值`
 
-参数：
+选项：
 
 - -name：文件名称
 - -type：文件类型
@@ -160,7 +240,29 @@ find . -name '*.txt'  # 在当前目录递归查找 以‘.txt’为后缀名的
 
 - -maxdepth要作为第一个变量
 
+
+
 # 高级命令
+
+## shutdown
+
+关机或重启
+
+格式：`shutdown [选项] [参数]`
+
+选项：
+
+- `-r`：重启
+- `-c`：取消接下来的重启/关机
+
+例如：
+
+```bash
+shutdown -r  # 系统将在1分钟后重启
+shutdown now  # 立刻关机
+shutdown -r +10  # 系统10分钟后重启
+shutdown 20:20  # 系统将在今天20:20关机
+```
 
 ## xargs
 
@@ -168,7 +270,7 @@ eXtended arguments的缩写，以为扩展的参数处理命令，可用于分�
 
 格式：`命令1 | xargs 命令2`
 
-参数：
+选项：
 
 - -d(delimiter)：指定定界符
 - -n：指定每个命令的参数个数
@@ -200,7 +302,7 @@ stream editor的缩写，流编辑器，一个文本处理命令，可以用于�
 
 ## pwd
 
-print word directory的缩写，打印当前目录
+print working directory的缩写，打印当前目录
 
 ## which
 
@@ -210,36 +312,398 @@ print word directory的缩写，打印当前目录
 which ls  # 打印命令ls所在的路径：/usr/bin/ls
 ```
 
+
+
+# 远程管理
+
 ## ssh 
 
 secure shell的缩写，安全远程通信
 
+选项：
+
+- `-p`：指定端口号，ssh服务端口号默认是22，可以不指定
+
+例如：
+
 ```bash
 ssh user_name@host_ip
+ssh -p 22 user_name@host_ip
 ssh user_name@host_name
+```
+
+给 `user_name@host_ip` **配置别名**：
+
+- 在.ssh目录下，创建或修改config文件，向其中追加：
+
+```txt
+Host 随便一个好记的名字
+  HostName 192.168.84.41  # ip地址或域名
+  User username  # 用户名
+```
+
+## ssh-keygen
+
+产生一对钥匙，公钥与私钥，可以用于免密登录。
+
+```bash
+ssh-keygen  # 一路回车后 在~/.ssh/ 目录下产生id_rsa(私钥), id_rsa.pub
+```
+
+## ssh-copy-id
+
+复制本地公钥到指定电脑。
+
+如果复制成功，会在对方家目录下的.ssh文件创建名为“authorized_keys”的文件（windows系统下在c:/user/user_name/.ssh），其内容为公钥内容。
+
+```bash
+ssh-copy-id user@host_ip  
+```
+
+## scp
+
+secure copy的缩写，安全远程拷贝
+
+用法与cp基本相同，不过scp用于不同电脑之间的文件拷贝
+
+格式：scp [选项] 源文件 目标文件
+
+选项:
+
+- `-P`：指定端口号。
+  - 注意这是大P，ssh的端口选项是小p
+
+```bash
+scp -r user@host:demo ~  # 把远程电脑的demo文件夹 拷贝到本地家目录下
 ```
 
 ## whoami
 
 ”我是谁“，打印当前的用户名
 
-## ps
+## who
 
-打印当前进程
+打印当前所有在线的用户列表
+
+## chmod
+
+change mode的缩写，修改文件权限
+
+格式：`chmod 权限 文件`
+
+例如：
+
+```bash
+chmod +x hello.py  # 增加hello.py的可执行权限
+chmod +rw 111.txt  # 增加111.txt的可读可写权限
+chmod -x dir  # 去除文件夹dir的权限，即无法进入文件夹dir
+chmod 766 hello.py  # hello.py的权限为 rwxrw-rw-
+chmod 321 hello.py  # hello.py的权限为 -wx-w---x
+```
+
+## 组管理
+
+### groupadd
+
+添加组
+
+格式：`groupadd 组名`
+
+注意：
+
+- 添加组需要有管理员权限，一般都要在`groupadd`前加`sudo`
+
+例如：
+
+```bash
+sudo groupadd dev  # 添加一个名叫“dev”的组
+```
+
+所有组的信息在 /etc/group 文件中
+
+```bash
+cat /etc/group  # 查看所有组的信息
+cat /etc/group | grep dev  # 查找 dev组 的信息
+```
+
+/etc/group**文件结构**：
+
+4样信息，用3个`: `隔开。
+
+```bash
+组名:组密码(如果加密则显示"x"):组号(Uid):组用户[, 第二个组用户]
+例如：
+zw:x:1000:  # zw组的组号是1000，其中包含zw用户（zw组是zw用户的初始组，zw组中不显示用户zw）
+dev:x:1001:zhangsan, lisi  # dev组的组号是1001，其中包含zhangsan、lisi用户
+```
+
+### groupdel
+
+删除组
+
+格式：`groupdel 组名`
+
+注意：
+
+- 删除组需要有管理员权限，一般都要在`groupdel`前加`sudo`
+
+例如：
+
+```bash
+sudo groupdel dev  # 删除名叫“dev”的组
+```
+
+### chgrp
+
+更改文件所属组
+
+格式：`chgrp [选项] 组名 文件名`
+
+选项：
+
+- `-R`：递归地修改文件所属组
+
+例如：
+
+```bash
+chgrp -R dev haha  # 令 “haha”文件夹及文件下内的所有文件 属于组 dev
+```
+
+## 用户管理
+
+### useradd
+
+添加用户
+
+格式：`useradd [选项] 用户名`
+
+选项：
+
+- `-m`：创建家目录
+- `-g`：指定所属组（主组）
+
+注意：
+
+- 创建用户时`-m`、`-g`一般都要加上。
+- 如果不加`-m`，要自己建立新用户的家目录，太麻烦
+  - 如果创建时忘记加`-m`，建议用户删了重新创建
+- `-g`指定的是用户的主组
+  - 如果不加`-g`，则会自动创建一个**跟用户同名的组**，并让该用户属于该组
+
+例如：
+
+```bash
+useradd -m -g dev zhangsan  # 添加新用户张三，并自动创建张三的家目录，该用户属于dev组
+```
+
+查看所有用户信息：
+
+```bash
+cat /etc/passwd  # 查看所有用户信息
+cat /etc/passwd | grep zw  # 查看用户zw的信息
+```
+
+/etc/passwd文件文件结构：
+
+7样信息，用六个`: `隔开。
+
+```txt
+用户名:用户密码(如果加密则显示“x”):用户号(Uid):用户主组号(Gid):用户全称:用户家目录:登录shell
+```
+
+### passwd
+
+设置用户密码
+
+格式：`passwd [用户名]`
+
+例如：
+
+```bash
+passwd  # 修改当前用户密码
+passwd zhangsan  # 修改张三用户的密码
+sudo passwd zhangsan  # 强制修改密码
+```
+
+### userdel
+
+删除用户
+
+格式：`userdel [选项] 用户名`
+
+选项：
+
+- `-r`：删除用户的同时删除对应家目录
+
+例如：
+
+```bash
+userdel -r zhangsan  # 删除用户zhangsan，同时删除zhangsan用户的家目录
+```
+
+### usermod
+
+更改用户属性
+
+格式：usermod 选项 用户
+
+选项：
+
+- `-g`：更改主组
+- `-G`：添加附加组
+
+- `-s`：更改登录shell
+
+例如：
+
+```bash
+usermod -g dev zhangsan  # 令zhangsan用户的主组为dev
+usermod -G sudo zhangsan  # 令zhangsan用户的附加组为sudo，即拥有sudo（超级用户）的权限
+usermod -s /bin/bash zhangsan  # 令zhangsan用户的登录shell为bash
+```
+
+### su
+
+switch user的缩写，切换用户。
+
+格式：`su [-] 用户名`
+
+选项：
+
+- `-`：切换用户后，当前目录也切换为对应用户的家目录。
+
+- `exit`：在切换为别的用户后，exit退出登录，回到原先的用户。
+
+### chown
+
+change owner的缩写，更改文件所属用户。
+
+格式：`chown [选项] 用户名 文件名`
+
+选项：
+
+- `-r`：递归地修改文件权限
+
+
+
+# 系统管理
+
+## date
+
+查看当前日期
+
+格式：`date`
+
+效果预览：
+
+```bash
+date
+# 2024年 01月 31日 星期三 20:23:22 CST
+```
+
+## cal
+
+calendar的缩写，查看日历
+
+格式：`cal [选项]`
+
+选项：
+
+- `-y`：显示当年的日历
+
+效果预览：
+
+```bash
+cal
+#       一月 2024
+# 日 一 二 三 四 五 六
+#     1  2  3  4  5  6
+#  7  8  9 10 11 12 13
+# 14 15 16 17 18 19 20
+# 21 22 23 24 25 26 27
+# 28 29 30 31
+```
 
 ## df
 
 disk free的缩写，查看磁盘使用情况
 
+格式：`df`
+
+选项：
+
+- `-h`：以人可读的方式显示
+
+## du
+
+disk usage的缩写，查看文件的磁盘使用情况
+
+格式：`du [选项] [文件]`
+
+选项：
+
+- `-h`：以人可读的方式显示
+
+例如：
+
+```bash
+du -h .  # 查看当前目录的占用大小
+du -h 111.txt  # 查看111.txt文件的占用大小
+```
+
+## ps
+
+process status的缩写，打印当前进程。
+
+格式：`ps [选项]`
+
+选项：
+
+- a：打印的进程信息包含其他用户的进程（默认只包含自己的进程）。
+- u：打印进程的详细信息（包括进程id、cpu使用率、内存使用率、哪个用户的创建的等信息）。
+- x：打印所有的进程信息，包括系统进程（内容很多很多，不常用）。
+
+注意：
+
+- ps默认打印的进程都是那些在**bash中开启的进程**。
+- ps的选项没有`-`，例如：`ps a` 而不是 `ps -a`
+
+例如：
+
+```bash
+ps a  # 打印所有用户的进程信息
+ps au  # 打印所有用户的详细进程信息
+```
+
+## top
+
+table of process的缩写，动态地显示进程运行状况，类似于windows的任务管理器。
+
+注意：
+
+- top命令会一直运行，按`q`退出
+
+## kill
+
+关闭进程
+
+格式：`kill 进程号(pid)`
+
+选项：
+
+- `-9`：强制关闭
+
 ## systemctl
 
 system control的缩写，管理系统服务
+
+
 
 # 开发命令
 
 ## vim
 
-visual interface improved的缩写，一个文本编辑工具。详细间[vim笔记](vim笔记)
+visual interface improved的缩写，一个文本编辑工具。详细见[vim笔记](vim笔记)
 
 ## Git
 
@@ -249,11 +713,11 @@ visual interface improved的缩写，一个文本编辑工具。详细间[vim笔
 
 GCC 是 “GNU Complier Collection”的缩写（原来是"GNU C Complier"），一个GNU的开发工具包
 
-GCC也是一条命令，用于c语言程序的编译
+GCC也是一条命令，用于c语言程序的编译，详细见[gcc笔记](./gcc笔记)
 
 ```bash
 gcc -o output main.c  # 生成可执行文件
-gcc -shared -o output.so main.c  # 生成共享库
+gcc -shared -o main.c output.so  # 生成共享库
 ```
 
 **G++**用于编译**c++**程序
