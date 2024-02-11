@@ -193,12 +193,12 @@ global regular expression print的缩写，文本搜索工具
 
 选项：
 
-- -i 忽略大小写
-- -E：正则匹配
-- -n 打印行号
-- -A<num\> 打印匹配行的 后num行
-- -B<num\> 打印匹配行的 前num行
-- -C<num\> 打印匹配行的 前后num行
+- `-i`：忽略大小写
+- `-E`：正则匹配
+- `-n`： 打印行号
+- `-A<num>`：打印匹配行的 后num行
+- `-B<num>`：打印匹配行的 前num行
+- `-C<num>`：打印匹配行的 前后num行
 
 例如：
 
@@ -214,6 +214,8 @@ grep -E '^1[0-9]$' 111.txt  # 在文件111.txt中搜索以‘1’为行开头，
 - 匹配模式默认意思就是要匹配的字符串
 - 在正则匹配中，匹配模式就是正则表达式
 
+# 高级命令
+
 ## find
 
 在指定目录查找文件
@@ -222,9 +224,9 @@ grep -E '^1[0-9]$' 111.txt  # 在文件111.txt中搜索以‘1’为行开头，
 
 选项：
 
-- -name：文件名称
-- -type：文件类型
-- -maxdepth：最大递归查找深度（深度为1时表示只在当前目录查找）
+- `-name`：文件名称
+- `-type`：文件类型
+- `-maxdepth`：最大递归查找深度（深度为1时表示只在当前目录查找）
 
 例如：
 
@@ -240,9 +242,67 @@ find . -name '*.txt'  # 在当前目录递归查找 以‘.txt’为后缀名的
 
 - -maxdepth要作为第一个变量
 
+## ln
+
+link的缩写，创建链接。
+
+格式：`ln [选项] 被链接文件 链接文件名`
+
+选项：
+
+- `-s`：创建软链接
+
+例如：
+
+```bash
+ln -s ~/haha/lala/heihei.txt ruan.txt  # 创建 /home/user/haha/lala/heihei.txt的软链接，链接文件名叫ruan.txt
+ln ~/haha/lala/heihei.txt ruan.txt  # 创建 /home/user/haha/lala/heihei.txt的硬链接，链接文件名叫ruan.txt
+```
+
+注意：
+
+- 创建软链接时，应当使用被链接文件的**绝对路径**，而不用相对路径。
+- 使用相对路径的话，如果链接文件被移动位置，链接就失效了。
+
+## tar
+
+tape archive 的缩写，打包工具（不包括压缩）
+
+格式：tar [选项]
+
+选项：
+
+- `-c`：创建一个档案文件（.tar）
+- `-v`：显示打包的详细信息
+- `-f`：指定打包文件的名称
+- `-x`：解压档案文件
+- `-C`：指定解包后的文件目录
+- `-z`：打包时使用gzip压缩，解包时使用gzip解压缩
+- `-j`：打包时使用bzip2压缩，解包时使用bzip2解压缩
+
+注意：
+
+- 大多数情况下打包就是选项组合：`-cvf`，解包就是`-xvf`
+- 打包并没有压缩，如果要压缩，要加命令`-z`或`-j`
+- `-z`表示使用gzip压缩，打包压缩后的文件为`xxx.tar.gz`
+- `-j`表示使用bzip2压缩，打包压缩后的文件为`xxx.tar.bz2`
+
+例如：
+
+```bash
+# 打包压缩
+tar -cvf txt.tar *.txt  # 将所有以“.txt”结尾的文件打包成一个“txt.tar”的文件
+tar -zcvf txt.tar *.txt  # 将所有以“.txt”结尾的文件打包成一个“txt.tar.gz”的文件 并压缩
+tar -jcvf txt.tar *.txt  # 将所有以“.txt”结尾的文件打包成一个“txt.tar.bz2”的文件 并压缩
+
+# 解压
+tar -zxvf txt.tar txt.tar.gz  # 将压缩文件“txt.tar.gz”解压缩和解包 到当前目录
+tar -jxvf txt.tar txt.tar.bz2 -C ~/haha # 将压缩文件“txt.tar.bz2”解压缩和解包 到 ~/haha目录
+```
+
+## ar
 
 
-# 高级命令
 
 ## shutdown
 
@@ -311,8 +371,6 @@ print working directory的缩写，打印当前目录
 ```bash
 which ls  # 打印命令ls所在的路径：/usr/bin/ls
 ```
-
-
 
 # 远程管理
 
@@ -587,6 +645,37 @@ change owner的缩写，更改文件所属用户。
 
 
 # 系统管理
+
+## lsb_release
+
+lsb是linux standard base_release的缩写，查看当前系统版本
+
+格式：`lsb_release -a`
+
+## apt
+
+advanced package tools的缩写，软件包管理工具
+
+格式：`apt 选项`
+
+选项：
+
+- `install`：安装软件
+- `remove`：卸载软件
+- `upgrade`：更新软件
+- `list --installed`：列出已安装的软件
+
+注意：
+
+- 安装、卸载软件是系统管理级别的操作，需要使用管理员权限`sudo`
+
+例如：
+
+```bash
+sudo apt install sl  # 安装一个名为“sl”的软件（一个小火车软件）
+sudo apt install htop  # 安装一个名为“htop”的软件（一个升级版的top）
+sudo apt remove sl  # 卸载名叫“sl”的软件
+```
 
 ## date
 
