@@ -356,7 +356,9 @@ find ./ -name '*,txt' | xargs grep -n 'main'
 
 ## sed
 
-stream editor的缩写，流编辑器，一个文本处理命令，可以用于对文本进行替换、删除、插入、打印等操作
+stream editor的缩写，流编辑器，一个文本处理命令，可以用于对文本进行替换、删除、插入、打印等操作。
+
+详细见[sed笔记](sed笔记)。
 
 ## read
 
@@ -640,7 +642,7 @@ change owner的缩写，更改文件所属用户。
 
 选项：
 
-- `-r`：递归地修改文件权限
+- `-R`：递归地修改文件权限
 
 
 
@@ -809,7 +811,11 @@ gcc -o output main.c  # 生成可执行文件
 gcc -shared -o main.c output.so  # 生成共享库
 ```
 
-**G++**用于编译**c++**程序
+**G++**用于编译**c++**程序，用法与gcc差不多。
+
+## Make
+
+构建工具，根据makefile的规则，来执行各项编译操作。详细见 [make笔记](make笔记)与[别人的make笔记](别人的make笔记)
 
 ## CMake
 
