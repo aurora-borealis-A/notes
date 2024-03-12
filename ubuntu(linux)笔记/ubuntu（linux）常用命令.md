@@ -788,6 +788,20 @@ table of process的缩写，动态地显示进程运行状况，类似于windows
 
 system control的缩写，管理系统服务
 
+格式：`systemctl 操作 服务名`
+
+操作：
+
+- `start`：启动服务。
+- `stop`：关闭服务。
+- `restart`：重启服务。
+- `status`：查看服务状态。
+- `enable`：开机自动启动指定服务。
+- `disable`：开启不自动启动指定服务。
+- `list-units`：列出当前系统正在运行或已经加载的服务。
+- `list-unit-files`：列出当前系统中已安装的unit文件及其状态。
+- `daemon-reload`：重新加载系统中systemd的配置文件。
+
 
 
 # 开发命令
