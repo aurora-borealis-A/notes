@@ -80,6 +80,7 @@ gcc -Wall main.o -lm  # -lm 是 /usr/bin/libm.a的缩写
 - 例如：当前目录有个库libmylib.a，如果`gcc -Wall main.o -lmylib`则会报错。
   - 需要`gcc -Wall main.o ./libmylib.a`，即：不使用`-lxxx`的方式才能找到库文件。
   - 配置环境变量与命令行中指定搜索路径也可以解决，详细说明在下节。
+- 链接选项`-L`与`-l`一定要写成`-o`之后，不能等于没写，编译器会说找不到库文件。
 
 
 ### 2.4 指定头文件与库文件路径

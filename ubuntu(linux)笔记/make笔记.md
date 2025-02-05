@@ -194,7 +194,7 @@ main: block.o command.o input.o main.o scene.o test.o
 
 - order-only依赖写在普通依赖的后面，用 `|` 隔开。
   - 如果order-only依赖文件不存在，则会执行生成该依赖的那条规则。
-  - 如果order-only依赖文件已经存在，则不会该依赖文件更新也不会导致该目标被更新。
+  - 如果order-only依赖文件已经存在，则该依赖文件更新也不会导致该目标被更新。
   - 也就是order-only只有在被生成时，会更新目标。生成后就不更新目标。
 
 例如：
@@ -1023,7 +1023,7 @@ clean:
 
 ## 2. 组合多目标
 
-- 独立多目标是多个目标对应的规则由冗余的简写。
+- 独立多目标是多个目标对应的规则有冗余的简写。
 
 - 而组合多个目标是把多个目标看作一个整体，看作一个大目标。
 
@@ -1517,12 +1517,12 @@ haha:
 例如：
 
 ```makefile
-hello = hello, $(1)!
-result = $(call hello,world)
+hello = hello, $(1)!  # 定义一个hello 函数
+result = $(call hello,world)  # 定义一个变量，这个变量用于执行hello函数，并向函数中传入参数world
 
 .PHONY: print
 print:
-        $(info result: $(result))
+        $(info result: $(result))  # 引用result变量，就相当于执行了result中的内容，也就是执行了hello函数
 ```
 
 执行结果：
@@ -1532,6 +1532,12 @@ result: hello, world!
 ```
 
 - hello是函数名，world是实参，$(1)是形参。
+
+**注意**：
+
+- **自定义的函数只能**通过`$(call 函数名，参数列表)`的格式来调用；
+- 不能像makefile内置函数一样用`$(函数名，参数列表)`的格式来调用；
+- 只能**内置函数能**用`$(函数名，参数列表)`的格式来调用。
 
 ## 字符串处理函数
 
@@ -2535,7 +2541,7 @@ result: /home/zhangsan/play/make/03_sudoku_stuctured/  # main.cpp的绝对路径
 ```
 
 - dirof是自定的函数，可以使用call命令调用。
-- 自定义函数没法像makefile中的内置函数一样用`s`调用，只能通过call函数调用
+- 自定义函数没法像makefile中的内置函数一样用`$`调用，只能通过call函数调用
 
 ### value
 
@@ -2898,4 +2904,52 @@ $(CC) $(LDFLAGS) *.o $(LDLIBS) $(LOADLIBES)
 - `LDLIBS`：使用链接器时的选项，默认为空。
   - 可以添加`-l`来指定要链接的库文件。
 
-# 八、嵌套makefile
+
+
+
+
+# 八、模式匹配
+
+
+
+# 九、嵌套makefile
+
+
+
+```makefile
+# 指定编译选项
+CXX = g++
+CXXFLAGS = -Wall -I$(include_dir)
+LDFLAGS = -Wall
+VPATH = ../include
+
+# 用于给文件名添加路径前缀，第一个参数为路径，第二个参数为文件名列表
+add_path = $(2:%=$(1)/%)
+target_bin = $(call add_path,$(bin_dir),$@)
+
+# 指定各编译文件路径
+src_dir = .
+include_dir = ../include
+bin_dir = ../bin
+
+# 各文件名
+srcs = main.cpp common.cpp graph.cpp AMGraph.cpp ALGraph.cpp OLGraph.cpp
+objs = $(srcs:.cpp=.o)
+srcs_full = $(call add_path,$(src_dir),$(srcs))
+objs_full = $(call add_path,$(bin_dir),$(objs))
+
+main: $(objs)
+    $(CXX) $(LDFLAGS) $(objs_full) -o $(target_bin)
+    $(target_bin)
+
+main.o: main.cpp AMLGraph.h
+    $(CXX) $(CXXFLAGS) -c $< -o $(target_bin)
+
+%.o: %.cpp %.h
+    $(CXX) $(CXXFLAGS) -c $< -o $(target_bin)
+
+.PHONY:clean
+clean:
+    -rm $(bin_dir)/*
+```
+
