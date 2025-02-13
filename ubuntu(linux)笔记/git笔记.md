@@ -104,6 +104,13 @@ git config --global user.email "邮箱地址"
 
 ### 3.4 head指针
 
+head指针是git中的一个概念，head指针指向的是当前正处于的分支或提交结点。
+
+- 切换head指针的指向，也就实现了分支的切换。
+  - 当`git checkout 分支`命令执行后，head指针指向的是目标分支的最新提交结点。
+  - 当`git checkout 提交结点hash值`：命令执行后，head指针指向是那个指定的提交结点。
+  - 因此，无论说head指针是指向
+
 
 
 ## 4. 标签

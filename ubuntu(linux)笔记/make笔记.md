@@ -222,7 +222,7 @@ main: block.o command.o input.o main.o scene.o | test.o
 test:
 		@echo $(SHELL)  # 打印 执行命令的SHELL
         a=2
-        @echo a=$${a}  # 打印 a= ，因为无法获取变量a的值，所有a=空。
+        @echo a=$${a}  # 打印 a= ，因为无法获取变量a的值，所以a=空。
 ```
 
 - 第二行定义的变量a，并不能在第三行的命令中取值。
@@ -239,7 +239,7 @@ test:
 
 - 打印结果为：a=2，说明这些方法是在同一个shell中进行的。
 - 之所以要用两个`$`来引用变量，是因为`$`在makefile中是引用makefile变量的意思，而这里a是shell中的变量，符号冲突了。
-  - makefile中的两个$表示命令行中的一个$。
+  - makefile中的两个表示命令行中的一个。
   - makefile中的一个$表示引用makefile中定义的变量（在方法之外定义的），不会被翻译在命令行中。
   - 下面关于变量的笔记会详细讲到$。
 
@@ -2914,7 +2914,9 @@ $(CC) $(LDFLAGS) *.o $(LDLIBS) $(LOADLIBES)
 
 # 九、嵌套makefile
 
+# 十、附录
 
+## 1. 标准makefile模板
 
 ```makefile
 # 指定编译选项
