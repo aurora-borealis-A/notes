@@ -88,7 +88,9 @@ git config --global user.email "邮箱地址"
     - 只列出存在于本地的分支，运程仓库的分支不会列出。
   - `git branch -r`：列出远程仓库分支
   - `git branch -a`：列出所有分支，包括本地分支与远程分支。
-
+  - `git branch -vv`：列出所有的本地分支，并显示本地分支绑定的运程分支。
+    - 什么是绑定的远程分支后面会讲到。
+  
 - **创建分支**：
   - `git branch 分支名`：创建一个名为“分支名“的分支。
 - **切换分支**：
@@ -281,6 +283,8 @@ head指针是git中的一个概念，head指针指向的是当前正处于的分
 - `git pull`：从线上仓库读取内容，使本地仓库更新到与线上仓库同步的版本。
 - `git push`：把本地仓库提交到线上，完成线上仓库的版本更新。
 - `git fetch`：
+
+- git push --set-upstream origin <branch_name>
 
 
 
