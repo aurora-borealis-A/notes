@@ -167,6 +167,18 @@ name=haha  # 定义一个变量name
 echo $name  # 打印变量name的值
 ```
 
+## pwd
+
+print working directory的缩写，打印当前目录
+
+## which
+
+打印命令所在的路径
+
+```bash
+which ls  # 打印命令ls所在的路径：/usr/bin/ls
+```
+
 ## tree
 
 以树状图形式显示目录结构
@@ -185,35 +197,7 @@ tree ~  # 显示家目录的结构
 tree -d ~ # 不包括文件
 ```
 
-## grep
-
-global regular expression print的缩写，文本搜索工具
-
-格式：`grep 匹配模式 文件名`
-
-选项：
-
-- `-i`：忽略大小写
-- `-r`：递归搜索
-- `-E`：正则匹配
-- `-n`： 打印行号
-- `-A<num>`：打印匹配行的 后num行
-- `-B<num>`：打印匹配行的 前num行
-- `-C<num>`：打印匹配行的 前后num行
-
-例如：
-
-```bash
-grep 'haha' 111.txt  # 在文件111.txt中搜索字符串‘haha’，并把该行打印出来
-grep -E '^1[0-9]$' 111.txt  # 在文件111.txt中搜索以‘1’为行开头，‘$’为行结尾的字符串
-```
-
-正则表达式详细见：[正则表达式](./正则表达式.md)
-
-注意：
-
-- 匹配模式默认意思就是要匹配的字符串
-- 在正则匹配中，匹配模式就是正则表达式
+- 
 
 # 高级命令
 
@@ -355,25 +339,45 @@ xargs -d ',' echo < 111.txt  # xargs将','作为分隔符（定界符），而�
 find ./ -name '*,txt' | xargs grep -n 'main'
 ```
 
+## grep
+
+global regular expression print的缩写，文本搜索工具
+
+格式：`grep 匹配模式 文件名`
+
+选项：
+
+- `-i`：忽略大小写
+- `-r`：递归搜索
+- `-E`：扩展正则匹配
+- `-n`： 打印行号
+- `-A<num>`：打印匹配行的 后num行
+- `-B<num>`：打印匹配行的 前num行
+- `-C<num>`：打印匹配行的 前后num行
+
+例如：
+
+```bash
+grep 'haha' 111.txt  # 在文件111.txt中搜索字符串‘haha’，并把该行打印出来
+grep -E '^1[0-9]$' 111.txt  # 在文件111.txt中搜索以‘1’为行开头，‘$’为行结尾的字符串
+```
+
+正则表达式详细见：[正则表达式](./正则表达式.md)
+
+注意：
+
+- 匹配模式默认意思就是基本正则表达式匹配
+  - 使用`-E`选项后是扩展正则表达匹配，扩展正则相对比较方便。
+
 ## sed
 
 stream editor的缩写，流编辑器，一个文本处理命令，可以用于对文本进行替换、删除、插入、打印等操作。
 
 详细见[sed笔记](sed笔记)。
 
+## awk
+
 ## read
-
-## pwd
-
-print working directory的缩写，打印当前目录
-
-## which
-
-打印命令所在的路径
-
-```bash
-which ls  # 打印命令ls所在的路径：/usr/bin/ls
-```
 
 # 远程管理
 
