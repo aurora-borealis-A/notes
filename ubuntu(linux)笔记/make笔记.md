@@ -933,6 +933,23 @@ objs = main.cpp hello.cpp test.cpp
 
 - 执行结果是打印`main.cpp hello.cpp test.cpp`，而不是`main.cpp hello.cpp`
 
+
+
+## 9. makefile内置变量
+
+- `MAKE`：
+  - **值**：为执行当前makefile的make工具的绝对路径，如`/usr/bin/make`或`/usr/local/bin/make`
+  - **作用**：
+    - 用于避免在makefile中递归调用make时，调用了不同版本的make；
+    - 递归调用make时可以继承make选项，如`-j`等。
+
+- `MAKECMDGOALS`：
+  - **值**：为命令行中指定的target（可以是多个）
+    - 例如：命令行中`make main clean`，则`MAKECMDGOALS`的值为`main clean`
+
+- `MAKEFILELISTS`：
+  - **值**：
+
 # 三、多目标与多方法
 
 ## 1. 独立多目标
@@ -2914,7 +2931,11 @@ $(CC) $(LDFLAGS) *.o $(LDLIBS) $(LOADLIBES)
 
 # 九、嵌套makefile
 
-# 十、附录
+
+
+
+
+# 附录
 
 ## 1. 标准makefile模板
 
