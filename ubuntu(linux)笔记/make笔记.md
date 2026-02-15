@@ -1639,14 +1639,14 @@ result: main.cpp src/command.cpp src/block.cpp src/input.cpp src/scene.cpp src/t
 
 - 中间多余的空格被去除了。
 
-### find
+### findstring
 
 在字符串中查找子字符串。如果查找到就返回查找到的结果，如果没有查找到就返回空串。
 
 格式：
 
 ```makefile
-$(find 子字符串,字符串)
+$(findstring 子字符串,字符串)
 ```
 
 例如：
