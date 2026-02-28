@@ -362,6 +362,8 @@ PRIVILEGED_DATA static UBaseType_t uxTaskNumber 					= ( UBaseType_t ) 0U;
 PRIVILEGED_DATA static volatile TickType_t xNextTaskUnblockTime		= ( TickType_t ) 0U; /* Initialised to portMAX_DELAY before the scheduler starts. */
 PRIVILEGED_DATA static TaskHandle_t xIdleTaskHandle					= NULL;			/*< Holds the handle of the idle task.  The idle task is created automatically when the scheduler is started. */
 
+PRIVILEGED_DATA static volatile UBaseType_t uxSchedulerSuspended	= ( UBaseType_t ) pdFALSE;
+
 
 ```
 
@@ -437,6 +439,23 @@ BaseType_t xTaskRemoveFromEventList( const List_t * const pxEventList )
 	#endif
 
 	return xReturn;
+}
+```
+
+## 挂起调度器
+
+`tasks.c`：
+
+```c++
+PRIVILEGED_DATA static volatile UBaseType_t uxSchedulerSuspended = ( UBaseType_t ) pdFALSE;
+
+void vTaskSuspendAll( void )
+{
+	/* A critical section is not required as the variable is of type
+	BaseType_t.  Please read Richard Barry's reply in the following link to a
+	post in the FreeRTOS support forum before reporting this as a bug! -
+	http://goo.gl/wu4acr */
+	++uxSchedulerSuspended;
 }
 ```
 
